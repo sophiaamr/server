@@ -4,9 +4,8 @@ import { ManutencaoController } from './manutencao.controller';
 import { ManutencaoService } from './manutencao.service';
 import { Manutencao } from '../../shared/entities/manutencao.entity';
 import { ManutencaoRepository } from '../../shared/repositories/manutencao.repository';
-import { JwtModule } from '@nestjs/jwt';
-import { AuthModule } from '@modules/auth/auth.module';
-import { UsersModule } from '@modules/users/users.module';
+import { AuthModule } from '../../modules/auth/auth.module';
+import { UsersModule } from '../../modules/users/users.module';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Manutencao]), AuthModule, UsersModule],
