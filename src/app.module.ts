@@ -15,7 +15,7 @@ import { VisitanteModule } from './modules/visitante/visitante.module';
 import { ChatPrivadoModule } from './modules/chat-privado/chat-privado.module';
 import { ChatGeralModule } from './modules/chat-geral/chat-geral.module';
 import { ProfissionalModule } from './modules/profissional/profissional.module';
-import { NotificationModule } from './modules/notification/notification.module';
+// import { NotificationModule } from './modules/notification/notification.module';
 
 @Module({
   imports: [
@@ -47,7 +47,7 @@ import { NotificationModule } from './modules/notification/notification.module';
     ChatPrivadoModule,
     ChatGeralModule,
     ProfissionalModule,
-    NotificationModule,
+    // NotificationModule,
   ],
 })
 export class AppModule {}
