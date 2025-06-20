@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 [];
-import { Role } from '../../shared/enums/role.enum';
+import { Role } from '../../../shared/enums/role.enum';
 import {
   IsEmail,
   IsEnum,

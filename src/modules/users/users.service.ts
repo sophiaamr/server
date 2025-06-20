@@ -4,7 +4,6 @@ import { UsersRepository } from '../../shared/repositories/users.repository';
 import { CreateRequestDTO } from './dto/createRequest.dto';
 import { UpdateRequestDTO } from './dto/updateRequest.dto';
 import { In } from 'typeorm';
-import { Role } from '../../shared/enums/role.enum';
 
 @Injectable()
 export class UsersService {
