@@ -9,7 +9,7 @@ import {
   IsPositive,
   IsString,
 } from 'class-validator';
-import { packageStatus } from '@shared/enums/packageStatus.enum';
+import { packageStatus } from '../../shared/enums/packageStatus.enum';
 export class CreatePackageDto {
   @ApiProperty({ example: 'Amazon' })
   @IsString()

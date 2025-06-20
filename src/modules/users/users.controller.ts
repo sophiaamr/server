@@ -14,7 +14,7 @@ import { CreateRequestDTO } from './dto/createRequest.dto';
 import { UpdateRequestDTO } from './dto/updateRequest.dto';
 import { UsersService } from './users.service';
 import { Apartamento } from '../../shared/entities/vaga.entity';
-import { ApartamentoService } from '@modules/apartamento/apartamento.service';
+import { ApartamentoService } from '../../modules/apartamento/apartamento.service';
 import { NotFoundError } from 'rxjs';
 import { UpdateFcmTokenDto } from './dto/updateFcmToken.dto';
 

@@ -1,9 +1,9 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, UnauthorizedException, NotFoundException } from '@nestjs/common';
-import { Apartamento } from '@shared/entities/apartamento.entity';
+import { Apartamento } from '../../shared/entities/apartamento.entity';
 import { ApartamentoService } from './apartamento.service';
 import { CreateApartamentoDto } from './dto/create-apartamento.dto';
 import { UpdateApartamentoDto } from './dto/update-apartamento.dto';
-import { UsersService } from '@modules/users/users.service';
+import { UsersService } from '../../modules/users/users.service';
 
 @Controller('apartamento')
 export class ApartamentoController {

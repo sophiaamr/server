@@ -5,8 +5,8 @@ import { AreasController } from './areas.controller';
 import { AreasService } from './areas.service';
 import { Area } from '../../shared/entities/area.entity';
 import { JwtModule } from '@nestjs/jwt';
-import { AuthModule } from '@modules/auth/auth.module';
-import { UsersModule } from '@modules/users/users.module';
+import { AuthModule } from '../../modules/auth/auth.module';
+import { UsersModule } from '../../modules/users/users.module';
 
 @Module({
   imports: [
