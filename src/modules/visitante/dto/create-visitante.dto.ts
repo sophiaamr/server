@@ -9,7 +9,7 @@ import {
   IsString,
   isPhoneNumber,
 } from 'class-validator';
-import { TipoVisitante } from '../../shared/enums/tipoVisitante.enum';
+import { TipoVisitante } from '@shared/enums/tipoVisitante.enum';
 export class CreateVisitanteDto {
   @ApiProperty({
     description: 'Nome',

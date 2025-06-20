@@ -2,11 +2,11 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { VisitanteController } from './visitante.controller';
 import { VisitanteService } from './visitante.service';
 import { HttpException, HttpStatus } from '@nestjs/common';
-import { Visitante } from '../../shared/entities/visitante.entity';
-import { TipoVisitante } from '../../shared/enums/tipoVisitante.enum'; 
-import { Role } from '../../shared/enums/role.enum';
-import { UsersService } from '../../modules/users/users.service';
-import { ApartamentoService } from '../../modules/apartamento/apartamento.service';
+import { Visitante } from '@shared/entities/visitante.entity';
+import { TipoVisitante } from '@shared/enums/tipoVisitante.enum'; 
+import { Role } from '@shared/enums/role.enum';
+import { UsersService } from '@modules/users/users.service';
+import { ApartamentoService } from '@modules/apartamento/apartamento.service';
 
 
 

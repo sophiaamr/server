@@ -4,8 +4,8 @@ import { LoginDTO } from './dtos/login.dto';
 import { RegisterDTO } from './dtos/register.dto';
 import { AuthResponseDTO } from './dtos/authResponde.dto';
 import { ApiOkResponse } from '@nestjs/swagger';
-import { Role } from '../../shared/enums/role.enum';
-import { UsersService } from '../../modules/users/users.service';
+import { Role } from '@shared/enums/role.enum';
+import { UsersService } from '@modules/users/users.service';
 
 @Controller('auth')
 export class AuthController {

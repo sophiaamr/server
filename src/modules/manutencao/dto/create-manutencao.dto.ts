@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { manutencaoStatus } from '../../shared/enums/manutencaoStatus.enum';
+import { manutencaoStatus } from '@shared/enums/manutencaoStatus.enum';
 import {
   IsIn,
   IsString,

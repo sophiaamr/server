@@ -1,5 +1,5 @@
 import { DataSource } from 'typeorm';
-import env from '../../config/env';
+import env from '@config/env';
 import * as path from 'node:path';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
 

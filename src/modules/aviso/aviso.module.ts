@@ -3,7 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AvisoController } from './aviso.controller';
 import { AvisoService } from './aviso.service';
 import { Aviso } from '../../shared/entities/aviso.entity';
-import { KafkaClientModule } from '../../modules/kafka/kafka-client.module';
+import { KafkaClientModule } from '@modules/kafka/kafka-client.module';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Aviso]), KafkaClientModule],

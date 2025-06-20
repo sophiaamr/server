@@ -6,7 +6,7 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
-import {User} from '../../shared/entities/user.entity';
+import {User} from '@shared/entities/user.entity';
 @Entity('registro_ocorrencia')
 export class RegistroOcorrencia {
   @PrimaryGeneratedColumn()

@@ -4,8 +4,8 @@ import { PackageController } from './package.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Package } from '../../shared/entities/package.entity';
 import { PackagesRepository } from '../../shared/repositories/packages.repository';
-import { AuthModule } from '../../modules/auth/auth.module';
-import { UsersModule } from '../../modules/users/users.module';
+import { AuthModule } from '@modules/auth/auth.module';
+import { UsersModule } from '@modules/users/users.module';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Package]), AuthModule, UsersModule],

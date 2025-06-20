@@ -4,7 +4,7 @@ import { ApartamentoController } from './apartamento.controller';
 import { Apartamento } from '../../shared/entities/apartamento.entity';
 import { ApartamentoRepository } from '../../shared/repositories/apartamento.repository';
 import { TypeOrmModule } from '@nestjs/typeorm/dist/typeorm.module';
-import { UsersModule } from '../../modules/users/users.module';
+import { UsersModule } from '@modules/users/users.module';
 
 @Module({
   imports: [

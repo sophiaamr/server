@@ -4,7 +4,7 @@ import { CreateRegistroOcorrenciaDto } from './dto/create-registro_ocorrencia.dt
 import { RegistroOcorrencia } from '../../shared/entities/registro_ocorrencia.entity';
 import { UpdateRegistroOcorrenciaDto } from './dto/update-registro_ocorrencia.dto';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
-import { Authorization } from '../../shared/decorators/authorization.decorator'; 
+import { Authorization } from '@shared/decorators/authorization.decorator'; 
 
 @Controller('registro-ocorrencia')
 @Authorization({}) 
