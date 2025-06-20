@@ -8,17 +8,17 @@ import { Transport } from '@nestjs/microservices';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: true });
 
-  app.connectMicroservice({
-    transport: Transport.KAFKA,
-    options: {
-      client: {
-        brokers: ['localhost:9092'],
-      },
-      consumer: {
-        groupId: 'notification-group',
-      },
-    },
-  });
+  // app.connectMicroservice({
+  //   transport: Transport.KAFKA,
+  //   options: {
+  //     client: {
+  //       brokers: ['localhost:9092'],
+  //     },
+  //     consumer: {
+  //       groupId: 'notification-group',
+  //     },
+  //   },
+  // });
 
   app.enableCors({
     origin: '*',
@@ -41,7 +41,7 @@ async function bootstrap() {
 
   app.useGlobalPipes(new ValidationPipe());
 
-  await app.startAllMicroservices();
+  // await app.startAllMicroservices();
 
   await app.listen(port, '0.0.0.0', () =>
     logger.log(`API is running on port ${port}`),
