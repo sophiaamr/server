@@ -2,14 +2,11 @@ import { ApiProperty } from '@nestjs/swagger';
 [];
 import {
   IsDate,
-  IsEnum,
   IsNotEmpty,
   IsNumber,
   IsOptional,
   IsString,
-  isPhoneNumber,
 } from 'class-validator';
-import { TipoVisitante } from '@shared/enums/tipoVisitante.enum';
 export class CreateVisitanteDto {
   @ApiProperty({
     description: 'Nome',

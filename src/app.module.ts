@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-// import configuration from '@config/env';
 import { ConfigModule } from '@nestjs/config';
 import { AvisoModule } from './modules/aviso/aviso.module';
 import { ManutencaoModule } from './modules/manutencao/manutencao.module';

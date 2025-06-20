@@ -13,12 +13,9 @@ import {
 import { VisitanteService } from './visitante.service';
 import { CreateVisitanteDto } from './dto/create-visitante.dto';
 import { UpdateVisitanteDto } from './dto/update-visitante.dto';
-import { find } from 'rxjs';
-import { toInt } from 'validator';
-import { UsersService } from '@modules/users/users.service';
-import { ApartamentoService } from '@modules/apartamento/apartamento.service';
-import { Role } from '@shared/enums/role.enum';
-import { HttpException, HttpStatus } from '@nestjs/common';
+import { UsersService } from '../../modules/users/users.service';
+import { ApartamentoService } from '../../modules/apartamento/apartamento.service';
+import { Role } from '../../shared/enums/role.enum';
 
 
 @Controller('visitante')

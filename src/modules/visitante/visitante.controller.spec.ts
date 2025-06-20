@@ -2,8 +2,8 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { VisitanteController } from './visitante.controller';
 import { VisitanteService } from './visitante.service';
 import { HttpException, HttpStatus } from '@nestjs/common';
-import { UsersService } from '@modules/users/users.service';
-import { ApartamentoService } from '@modules/apartamento/apartamento.service';
+import { UsersService } from '../../modules/users/users.service';
+import { ApartamentoService } from '../../modules/apartamento/apartamento.service';
 
 
 

@@ -4,8 +4,7 @@ import { UsersRepository } from '../../shared/repositories/users.repository';
 import { User } from '../../shared/entities/user.entity';
 import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
-import { ApartamentoModule } from '@modules/apartamento/apartamento.module';
-import { ApartamentoService } from '@modules/apartamento/apartamento.service';
+import { ApartamentoModule } from '../../modules/apartamento/apartamento.module';
 
 @Module({
   imports: [

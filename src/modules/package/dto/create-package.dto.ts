@@ -1,15 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
 import {
-  IsBoolean,
   IsDateString,
   IsIn,
-  IsInt,
-  IsNotEmpty,
   IsOptional,
-  IsPositive,
   IsString,
 } from 'class-validator';
-import { packageStatus } from '@shared/enums/packageStatus.enum';
+import { packageStatus } from '../../../shared/enums/packageStatus.enum';
 export class CreatePackageDto {
   @ApiProperty({ example: 'Amazon' })
   @IsString()
@@ -24,11 +20,6 @@ export class CreatePackageDto {
   @IsDateString()
   estimatedDelivery: string;
 
-  //@ApiProperty({ example: '1' })
-  //@IsInt()
-  //@IsPositive()
-  //@IsNotEmpty()
-  //apartamentoId: number;
 
   @ApiProperty({ example: 'João da Silva' })
   @IsString()
