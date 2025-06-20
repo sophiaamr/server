@@ -18,7 +18,6 @@ import { toInt } from 'validator';
 import { UsersService } from '@modules/users/users.service';
 import { ApartamentoService } from '@modules/apartamento/apartamento.service';
 import { Role } from '@shared/enums/role.enum';
-import { Test, TestingModule } from '@nestjs/testing';
 import { HttpException, HttpStatus } from '@nestjs/common';
 
 
