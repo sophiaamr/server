@@ -56,3 +56,5 @@ pids
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
 chama-o-sindico-52d5b-firebase-adminsdk-fbsvc-a59b268a27.json
+
+kafka-certs

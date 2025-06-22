@@ -3,22 +3,9 @@ import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import env from './config/env';
 import { Logger, ValidationPipe } from '@nestjs/common';
-import { Transport } from '@nestjs/microservices';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: true });
-
-  // app.connectMicroservice({
-  //   transport: Transport.KAFKA,
-  //   options: {
-  //     client: {
-  //       brokers: ['localhost:9092'],
-  //     },
-  //     consumer: {
-  //       groupId: 'notification-group',
-  //     },
-  //   },
-  // });
 
   app.enableCors({
     origin: '*',
@@ -28,7 +15,8 @@ async function bootstrap() {
 
   app.setGlobalPrefix('api');
 
-  const port = env().application.port;
+  // O Render define a porta através da variável de ambiente process.env.PORT
+  const port = process.env.PORT || env().application.port;
   const logger = new Logger('NestApplication');
 
   const config = new DocumentBuilder()
@@ -41,8 +29,9 @@ async function bootstrap() {
 
   app.useGlobalPipes(new ValidationPipe());
 
-  // await app.startAllMicroservices();
+  // A chamada await app.startAllMicroservices() foi removida.
 
+  // Inicia o servidor HTTP para ouvir as requisições da API
   await app.listen(port, '0.0.0.0', () =>
     logger.log(`API is running on port ${port}`),
   );

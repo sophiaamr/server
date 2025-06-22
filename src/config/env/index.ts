@@ -8,11 +8,7 @@ export default () => {
       },
     },
     database: {
-      host: process.env.DB_HOST,
-      port: process.env.DB_PORT ? parseInt(process.env.DB_PORT) : 5432,
-      user: process.env.DB_USERNAME,
-      password: process.env.DB_PASSWORD,
-      name: process.env.DB_DATABASE,
+      url: process.env.DATABASE_URL,
     },
   };
 };

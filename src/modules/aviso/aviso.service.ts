@@ -5,30 +5,30 @@ import { Repository } from 'typeorm';
 import { Aviso } from '../../shared/entities/aviso.entity';
 import { CreateAvisoDto } from './dto/create-aviso.dto';
 import { UpdateAvisoDto } from './dto/update-aviso.dto';
+import { ClientKafka } from '@nestjs/microservices';
 
 @Injectable()
-export class AvisoService {
-//implements OnModuleInit {
+export class AvisoService implements OnModuleInit {
   private readonly logger = new Logger(AvisoService.name);
 
   constructor(
     @InjectRepository(Aviso)
     private readonly avisoRepository: Repository<Aviso>,
-   // @Inject('KAFKA_SERVICE') private readonly kafkaClient: ClientKafka,
+   @Inject('KAFKA_SERVICE') private readonly kafkaClient: ClientKafka,
   ) {}
 
-  // async onModuleInit() {
-  //   await this.kafkaClient.connect();
-  // }
+  async onModuleInit() {
+    await this.kafkaClient.connect();
+  }
 
   async create(createAvisoDto: CreateAvisoDto): Promise<Aviso> {
     const aviso = this.avisoRepository.create(createAvisoDto);
     const novoAviso = await this.avisoRepository.save(aviso);
 
-    // this.logger.log(
-    //   `--> [Kafka Producer] Emitindo evento para o tópico "avisos-criados"`,
-    // );
-    // this.kafkaClient.emit('avisos-criados', novoAviso);
+    this.logger.log(
+      `--> [Kafka Producer] Emitindo evento para o tópico "avisos-criados"`,
+    );
+    this.kafkaClient.emit('avisos-criados', novoAviso);
 
     return novoAviso;
   }

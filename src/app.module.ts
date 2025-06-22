@@ -15,7 +15,8 @@ import { VisitanteModule } from './modules/visitante/visitante.module';
 import { ChatPrivadoModule } from './modules/chat-privado/chat-privado.module';
 import { ChatGeralModule } from './modules/chat-geral/chat-geral.module';
 import { ProfissionalModule } from './modules/profissional/profissional.module';
-// import { NotificationModule } from './modules/notification/notification.module';
+import { dataSource } from '@config/typeorm/dataSource';
+import { NotificationModule } from '@modules/notification/notification.module';
 
 @Module({
   imports: [
@@ -23,16 +24,7 @@ import { ProfissionalModule } from './modules/profissional/profissional.module';
       // load: [configuration],
       isGlobal: true,
     }),
-     TypeOrmModule.forRoot({
-    type: 'postgres',
-    url: process.env.DATABASE_URL,
-    ssl: {
-      rejectUnauthorized: false
-    },
-    autoLoadEntities: true,
-    synchronize: process.env.NODE_ENV !== 'production',
-    logging: process.env.NODE_ENV === 'development',
-  }),
+    TypeOrmModule.forRoot(dataSource.options),
     AvisoModule,
     ManutencaoModule,
     RegistroOcorrenciaModule,
@@ -47,7 +39,7 @@ import { ProfissionalModule } from './modules/profissional/profissional.module';
     ChatPrivadoModule,
     ChatGeralModule,
     ProfissionalModule,
-    // NotificationModule,
+    NotificationModule,
   ],
 })
 export class AppModule {}

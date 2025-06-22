@@ -4,5 +4,13 @@
   "sourceRoot": "src",
   "compilerOptions": {
     "deleteOutDir": true
+  },
+  "entryFile": "main",
+  "projects": {
+    "consumer": {
+      "type": "application",
+      "root": "src",
+      "entryFile": "consumer"
+    }
   }
 }
