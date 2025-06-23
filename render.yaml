@@ -1,20 +1,8 @@
-# render.yaml (Versão Corrigida e Validada)
+# render.yaml (Versão com indentação e estrutura 100% corrigidas)
 
-# Define um grupo de variáveis e segredos que serão compartilhados entre os serviços.
-# Os valores serão preenchidos por você no painel do Render.
-envVarGroups:
-  - name: shared-credentials
-    envVars:
-      - key: DATABASE_URL
-        fromDatabase:
-          name: chama_o_sindico # O nome do seu serviço de banco de dados no Render
-          property: connectionString
-      - key: KAFKA_SERVICE_URI
-        generateValue: false # Apenas define a chave, o valor virá do painel
-      - key: NODE_ENV # Define o ambiente como produção
-        value: production
-
+# O bloco 'services' é o único item no nível raiz do arquivo.
 services:
+  # O hífen (-) indica o início de um novo item na lista de serviços.
   # Serviço da API REST (seu serviço "server")
   - type: web
     name: server
@@ -22,13 +10,21 @@ services:
     plan: free
     buildCommand: 'npm install && npm run build'
     startCommand: 'node dist/main.js'
+    # 'healthCheck' está corretamente aninhado sob o serviço.
     healthCheck:
       path: /api
       initialDelaySeconds: 45
-    # Aplica o grupo de credenciais a este serviço
-    envVarGroups:
-      - name: shared-credentials
-    # Define os arquivos secretos que este serviço precisa
+    # 'envVars' também está aninhado sob o serviço.
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: chama_o_sindico # Nome do seu serviço de banco de dados no Render
+          property: connectionString
+      - key: KAFKA_SERVICE_URI
+        fromSecret: KAFKA_SERVICE_URI
+      - key: NODE_ENV
+        value: production
+    # 'secretFiles' também está aninhado sob o serviço.
     secretFiles:
       - key: service.key
         mountPath: /etc/secrets/service.key
@@ -44,10 +40,15 @@ services:
     plan: free
     buildCommand: 'npm install && npm run build'
     startCommand: 'node dist/consumer.js'
-    # Aplica o mesmo grupo de credenciais ao worker
-    envVarGroups:
-      - name: shared-credentials
-    # O worker também precisa dos certificados para se conectar
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: chama_o_sindico
+          property: connectionString
+      - key: KAFKA_SERVICE_URI
+        fromSecret: KAFKA_SERVICE_URI
+      - key: NODE_ENV
+        value: production
     secretFiles:
       - key: service.key
         mountPath: /etc/secrets/service.key
