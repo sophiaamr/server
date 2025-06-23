@@ -19,11 +19,15 @@ export class BookingsController {
 
   @Get()
   async findAll(@Query('userId') userId?: string): Promise<Booking[]> {
-    console.log('Query userId recebido:', userId); // Debug
+    console.log('Query userId recebido:', userId);
 
     if (userId) {
-      return this.service.findByUserId(+userId);
+      const userIdNumber = +userId;
+      console.log('Buscando reservas para userId:', userIdNumber);
+      return this.service.findByUserId(userIdNumber);
     }
+
+    console.log('Buscando todas as reservas');
     return this.service.findAll();
   }
 
