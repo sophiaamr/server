@@ -5,36 +5,41 @@ import env from './config/env';
 import { Logger, ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { cors: true });
+// ✅ REMOVER { cors: true } daqui
+const app = await NestFactory.create(AppModule);
 
-  app.enableCors({
-    origin: '*',
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true,
-  });
+// ✅ CONFIGURAÇÃO CORS MAIS COMPLETA
+app.enableCors({
+  origin: [
+    'http://localhost:3000',
+    'https://clientweb-rjwa82jas-sophias-projects-f41fb4c2.vercel.app',
+    /https:\/\/.*\.vercel\.app$/,
+  ],
+  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'Origin', 'X-Requested-With'],
+  credentials: true,
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+});
 
-  app.setGlobalPrefix('api');
+app.setGlobalPrefix('api');
 
-  // O Render define a porta através da variável de ambiente process.env.PORT
-  const port = process.env.PORT || env().application.port;
-  const logger = new Logger('NestApplication');
+const port = process.env.PORT || env().application.port;
+const logger = new Logger('NestApplication');
 
-  const config = new DocumentBuilder()
-    .setTitle('Chama o Síndico Backend')
-    .setVersion('1.0')
-    .addBearerAuth()
-    .build();
-  const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api/docs', app, document);
+const config = new DocumentBuilder()
+  .setTitle('Chama o Síndico Backend')
+  .setVersion('1.0')
+  .addBearerAuth()
+  .build();
+const document = SwaggerModule.createDocument(app, config);
+SwaggerModule.setup('api/docs', app, document);
 
-  app.useGlobalPipes(new ValidationPipe());
+app.useGlobalPipes(new ValidationPipe());
 
-  // A chamada await app.startAllMicroservices() foi removida.
-
-  // Inicia o servidor HTTP para ouvir as requisições da API
-  await app.listen(port, '0.0.0.0', () =>
-    logger.log(`API is running on port ${port}`),
-  );
+await app.listen(port, '0.0.0.0', () =>
+  logger.log(`API is running on port ${port}`)
+);
 }
 
 bootstrap();
