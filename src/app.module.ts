@@ -15,7 +15,7 @@ import { VisitanteModule } from './modules/visitante/visitante.module';
 import { ChatPrivadoModule } from './modules/chat-privado/chat-privado.module';
 import { ChatGeralModule } from './modules/chat-geral/chat-geral.module';
 import { ProfissionalModule } from './modules/profissional/profissional.module';
-import { dataSource } from '@config/typeorm/dataSource';
+import { dataSource } from './config/typeorm/dataSource';
 import { NotificationModule } from '@modules/notification/notification.module';
 
 @Module({
