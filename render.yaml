@@ -1,22 +1,12 @@
-# render.yaml
-services:
-  # Serviço da API REST que será seu "server"
-  - type: web
-    name: server # Mesmo nome do seu serviço existente
-    env: node
-    plan: free
-    buildCommand: "npm install && npm run build"
-    startCommand: "node dist/main.js" # Inicia a API
-    healthCheck: # Opcional, mas bom para saber se a API está no ar
-      path: /api
-      initialDelaySeconds: 30
+envVarGroups:
+  - name: shared-credentials
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: chama_o_sindico # Nome do seu banco de dados no Render
+          name: chama_o_sindico
           property: connectionString
       - key: KAFKA_SERVICE_URI
-        fromSecret: KAFKA_SERVICE_URI
+        value: "" 
     secretFiles:
       - key: service.key
         mountPath: /etc/secrets/service.key
@@ -25,24 +15,24 @@ services:
       - key: ca.pem
         mountPath: /etc/secrets/ca.pem
 
-  # NOVO: Serviço do Consumer (Background Worker)
+services:
+  - type: web
+    name: server
+    env: node
+    plan: free
+    buildCommand: "npm install && npm run build"
+    startCommand: "node dist/main.js"
+    healthCheck:
+      path: /api
+      initialDelaySeconds: 30
+    envVarGroups:
+      - name: shared-credentials
+
   - type: worker
     name: sindico-consumer
     env: node
     plan: free
     buildCommand: "npm install && npm run build"
-    startCommand: "node dist/consumer.js" # Inicia o ouvinte
-    envVars:
-      - key: DATABASE_URL
-        fromDatabase:
-          name: chama_o_sindico # Também precisa de acesso ao banco
-          property: connectionString
-      - key: KAFKA_SERVICE_URI
-        fromSecret: KAFKA_SERVICE_URI
-    secretFiles:
-      - key: service.key
-        mountPath: /etc/secrets/service.key
-      - key: service.cert
-        mountPath: /etc/secrets/service.cert
-      - key: ca.pem
-        mountPath: /etc/secrets/ca.pem
+    startCommand: "node dist/consumer.js"
+    envVarGroups:
+      - name: shared-credentials
