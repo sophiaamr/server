@@ -12,7 +12,7 @@ const app = await NestFactory.create(AppModule);
 app.enableCors({
   origin: [
     'http://localhost:3000',
-    'https://clientweb-rjwa82jas-sophias-projects-f41fb4c2.vercel.app',
+    'https://clientweb-phi.vercel.app',
     /https:\/\/.*\.vercel\.app$/,
   ],
   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
