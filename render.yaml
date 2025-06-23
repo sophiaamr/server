@@ -1,12 +1,34 @@
+# render.yaml (Versão Corrigida e Validada)
+
+# Define um grupo de variáveis e segredos que serão compartilhados entre os serviços.
+# Os valores serão preenchidos por você no painel do Render.
 envVarGroups:
   - name: shared-credentials
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: chama_o_sindico
+          name: chama_o_sindico # O nome do seu serviço de banco de dados no Render
           property: connectionString
       - key: KAFKA_SERVICE_URI
-        value: "" 
+        generateValue: false # Apenas define a chave, o valor virá do painel
+      - key: NODE_ENV # Define o ambiente como produção
+        value: production
+
+services:
+  # Serviço da API REST (seu serviço "server")
+  - type: web
+    name: server
+    env: node
+    plan: free
+    buildCommand: 'npm install && npm run build'
+    startCommand: 'node dist/main.js'
+    healthCheck:
+      path: /api
+      initialDelaySeconds: 45
+    # Aplica o grupo de credenciais a este serviço
+    envVarGroups:
+      - name: shared-credentials
+    # Define os arquivos secretos que este serviço precisa
     secretFiles:
       - key: service.key
         mountPath: /etc/secrets/service.key
@@ -15,24 +37,21 @@ envVarGroups:
       - key: ca.pem
         mountPath: /etc/secrets/ca.pem
 
-services:
-  - type: web
-    name: server
-    env: node
-    plan: free
-    buildCommand: "npm install && npm run build"
-    startCommand: "node dist/main.js"
-    healthCheck:
-      path: /api
-      initialDelaySeconds: 30
-    envVarGroups:
-      - name: shared-credentials
-
+  # Serviço do Consumer (Background Worker)
   - type: worker
     name: sindico-consumer
     env: node
     plan: free
-    buildCommand: "npm install && npm run build"
-    startCommand: "node dist/consumer.js"
+    buildCommand: 'npm install && npm run build'
+    startCommand: 'node dist/consumer.js'
+    # Aplica o mesmo grupo de credenciais ao worker
     envVarGroups:
       - name: shared-credentials
+    # O worker também precisa dos certificados para se conectar
+    secretFiles:
+      - key: service.key
+        mountPath: /etc/secrets/service.key
+      - key: service.cert
+        mountPath: /etc/secrets/service.cert
+      - key: ca.pem
+        mountPath: /etc/secrets/ca.pem
