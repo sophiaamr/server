@@ -26,13 +26,11 @@ async create(createDto: CreateRegistroOcorrenciaDto, userId: number): Promise<Re
 }
 
 async findAll(user: any): Promise<RegistroOcorrencia[]> {
-  const whereCondition = user.role === 1 ? {} : { userId: user.id };
-  
   return await this.registroRepository.find({
-    where: whereCondition,
     relations: ['user'], 
     order: { dataCriacao: 'DESC' }
   });
+  
 }
 
 async findOne(id: number, userId: number): Promise<RegistroOcorrencia> {
@@ -45,25 +43,16 @@ async findOne(id: number, userId: number): Promise<RegistroOcorrencia> {
     throw new NotFoundException(`Ocorrência com ID ${id} não encontrada.`);
   }
 
-  
-  const user = { id: userId }; 
-  if (ocorrencia.userId !== userId) {
-    throw new ForbiddenException('Você só pode visualizar ocorrências que você criou.');
-  }
-
-  return ocorrencia;
+  return ocorrencia; 
 }
 
 async update(id: number, updateDto: UpdateRegistroOcorrenciaDto, userId: number): Promise<RegistroOcorrencia> {
-
-  
   const ocorrenciaExistente = await this.registroRepository.findOne({ where: { id } });
   
   if (!ocorrenciaExistente) {
     throw new NotFoundException(`Ocorrência com ID ${id} não encontrada para atualização.`);
   }
 
-  
   if (ocorrenciaExistente.userId !== userId) {
     throw new ForbiddenException('Você só pode editar ocorrências que você criou.');
   }
@@ -74,13 +63,10 @@ async update(id: number, updateDto: UpdateRegistroOcorrenciaDto, userId: number)
     userId: ocorrenciaExistente.userId, 
   });
 
-  const resultado = await this.registroRepository.save(ocorrencia);
-
-  return resultado;
+  return await this.registroRepository.save(ocorrencia);
 }
 
 async remove(id: number, userId: number): Promise<void> {
-  
   const ocorrencia = await this.registroRepository.findOne({ where: { id } });
   
   if (!ocorrencia) {
